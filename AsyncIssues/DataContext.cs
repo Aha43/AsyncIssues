@@ -1,24 +1,22 @@
 ﻿namespace AsyncIssues
 {
-    public interface IDataContext
-    {
-        Task AddAsync(object data);
-        void Close();
-    }
-
-    public class DataContext : IDataContext
+    public class DataContext
     {
         private bool _disposed = false;
 
-        public async Task AddAsync(object data)
-        {
-            await Task.Delay(1000);
+        public object? SavedData { get; private set; }
 
+        public void Save(object data) 
+        {
             if (_disposed)
             {
-                throw new Exception("Can not save: Data context closed");
+                throw new DataContextClosedException();
             }
+
+            // Real code would save somehow data external...
+            SavedData = data;
         }
+       
 
         public void Close() =>  _disposed = true;
 
