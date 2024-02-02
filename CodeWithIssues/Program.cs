@@ -26,8 +26,10 @@ internal class Program
         // This is a case developer gets a warning by the 'standard .net' code analyzers because he or she 
         // calls an async method like a void method AND not store the returned Task (which would indicate
         // some strategy to handle awaiting effectively)
-
+        //
         // Developer should ALSO known from the Async in the name...
+        //
+        // Note that the warning is no longer CS4014 but the Lindhart...
     }
 
     private static void UseOfSomeSystem2(SomeSytem system)
@@ -68,18 +70,9 @@ internal class Program
         system.SaveStateAsync(ctx);
         ctx.Close();
 
-        // This may be bit surprising and understandable reason for missing await:
-        // It is very similar to case 1 WHERE we get a warning BUT here we does not.
         //
-        // Difference is we here are referencing an interface not an instance.
-        // Interface methods that return Task does not require the implementation to be
-        // async but the client can't assume it is not so should always await.
+        // With the Lindhart code analyzer we ALSO get a warning for the interface case :-)
         //
-        // But CS4014 only report on calling implementation method with the async
-        // keyword in signature and interfaces methods can not have that.
-        //
-        // However SomeOtherSystem developers try to communicate method probably
-        // should be awaited by the Async the the name...
     }
 
 }
