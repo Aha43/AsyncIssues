@@ -40,7 +40,6 @@ internal class Program
 
         // Reason is code analyzer observe developer take care of return value of a not awaited
         // async method which is a Task so assumed she / he know what she / he is doing. 
-
         // In this case the analyzers think to highly of developer... 
     }
 
